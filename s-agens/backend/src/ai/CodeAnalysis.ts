@@ -14,7 +14,7 @@ export class CodeAnalysis {
       const opts: ConstructorParameters<typeof Anthropic>[0] = {
         apiKey: env.ANTHROPIC_API_KEY,
       };
-      if (env.ANTHROPIC_WORKSPACE_ID) {
+      if (env.ANTHROPIC_WORKSPACE_ID && env.ANTHROPIC_WORKSPACE_ID.startsWith('wrkspc_')) {
         opts.defaultHeaders = {
           'anthropic-workspace-id': env.ANTHROPIC_WORKSPACE_ID,
         };

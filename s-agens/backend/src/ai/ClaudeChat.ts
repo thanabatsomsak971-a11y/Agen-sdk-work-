@@ -19,10 +19,16 @@ export class ClaudeChat {
       const opts: ConstructorParameters<typeof Anthropic>[0] = {
         apiKey: env.ANTHROPIC_API_KEY,
       };
-      if (env.ANTHROPIC_WORKSPACE_ID) {
+      if (env.ANTHROPIC_WORKSPACE_ID && env.ANTHROPIC_WORKSPACE_ID.startsWith('wrkspc_')) {
         opts.defaultHeaders = {
           'anthropic-workspace-id': env.ANTHROPIC_WORKSPACE_ID,
         };
+      } else if (env.ANTHROPIC_WORKSPACE_ID) {
+        // eslint-disable-next-line no-console
+        console.warn(
+          '⚠ ANTHROPIC_WORKSPACE_ID is set but not in valid format (must start with wrkspc_). ' +
+            'Skipping header — API may reject requests.',
+        );
       }
       this.client = new Anthropic(opts);
     }

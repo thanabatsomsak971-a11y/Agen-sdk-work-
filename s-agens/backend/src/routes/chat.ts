@@ -1,0 +1,57 @@
+import { Router } from 'express';
+import { z } from 'zod';
+import { claudeChat, type ChatMessage } from '../ai/ClaudeChat';
+
+const chat = Router();
+
+const bodySchema = z.object({
+  messages: z
+    .array(
+      z.object({
+        role: z.enum(['user', 'assistant']),
+        content: z.string().min(1),
+      }),
+    )
+    .min(1),
+});
+
+chat.post('/', async (req, res) => {
+  if (!claudeChat.isAvailable()) {
+    return res.status(503).json({
+      error: claudeChat.configurationError() ?? 'Claude chat unavailable',
+    });
+  }
+
+  const parsed = bodySchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ error: parsed.error.flatten().fieldErrors });
+  }
+
+  try {
+    const reply = await claudeChat.chat(parsed.data.messages as ChatMessage[]);
+    res.json({ reply, model: claudeChat.getModel() });
+  } catch (err) {
+    const raw = (err as Error).message;
+    // Extract human-readable message from Anthropic API error JSON
+    let message = raw;
+    try {
+      const match = raw.match(/\{[\s\S]*\}/);
+      if (match) {
+        const parsed = JSON.parse(match[0]);
+        if (parsed?.error?.message) message = parsed.error.message;
+      }
+    } catch {
+      // keep raw message
+    }
+    const status = raw.includes('401') || raw.includes('403')
+      ? 401
+      : raw.includes('429')
+        ? 429
+        : 500;
+    // eslint-disable-next-line no-console
+    console.error('Claude chat error:', message);
+    res.status(status).json({ error: message });
+  }
+});
+
+export default chat;

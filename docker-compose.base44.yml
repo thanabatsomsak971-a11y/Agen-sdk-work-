@@ -1,0 +1,64 @@
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    image: node:20-alpine
+    working_dir: /app/backend
+    volumes:
+      - ./s-agens/backend:/app/backend
+    ports:
+      - "8000:3001"
+    environment:
+      NODE_ENV: development
+      BACKEND_PORT: 3001
+      MONGO_URL: mongodb://mongo:27017/s_agens
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: dev-only-secret-change-in-production-please-min32chars
+      CORS_ORIGIN: https://3000-${BASE44_PUBLIC_HOST_SUFFIX}
+      INSPECTION_INTERVAL_MS: 5000
+      DEBUG: 'false'
+    env_file:
+      - /run/base44/app.env
+    command: sh -c "[ -d node_modules ] || npm install && npm run dev"
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  frontend:
+    image: node:20-alpine
+    working_dir: /app/frontend
+    volumes:
+      - ./s-agens/frontend:/app/frontend
+    ports:
+      - "3000:5173"
+    environment:
+      VITE_API_URL: https://8000-${BASE44_PUBLIC_HOST_SUFFIX}
+    command: sh -c "[ -d node_modules ] || npm install && npm run dev"
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:
+  redis_data:

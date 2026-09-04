@@ -11,6 +11,7 @@ const schema = z.object({
   CORS_ORIGIN: z.string().default('http://localhost:5173'),
   ANTHROPIC_API_KEY: z.string().optional().default(''),
   ANTHROPIC_MODEL: z.string().default('claude-sonnet-4-20250514'),
+  ANTHROPIC_WORKSPACE_ID: z.string().optional().default(''),
   OPENAI_API_KEY: z.string().optional().default(''),
   GOOGLE_API_KEY: z.string().optional().default(''),
   INSPECTION_INTERVAL_MS: z.coerce.number().int().positive().default(5000),

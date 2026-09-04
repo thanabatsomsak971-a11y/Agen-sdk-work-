@@ -16,7 +16,15 @@ export class ClaudeChat {
 
   constructor() {
     if (env.ANTHROPIC_API_KEY) {
-      this.client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
+      const opts: ConstructorParameters<typeof Anthropic>[0] = {
+        apiKey: env.ANTHROPIC_API_KEY,
+      };
+      if (env.ANTHROPIC_WORKSPACE_ID) {
+        opts.defaultHeaders = {
+          'anthropic-workspace-id': env.ANTHROPIC_WORKSPACE_ID,
+        };
+      }
+      this.client = new Anthropic(opts);
     }
   }
 

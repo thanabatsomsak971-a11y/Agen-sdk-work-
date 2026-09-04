@@ -1,0 +1,29 @@
+original_name,logical_path,role,path_confidence,sha256,content_modified
+file.sh,scripts/setup-frontend.sh,setup script,high,a86b96d054d02dda79375b4224f1b23cf7f1df1b808c89617f7587c8ce1366e1,no
+_Backend_API_Node.js_Express_TypeScript_.css,frontend/src/index.css,frontend global Tailwind CSS,medium,e311493873799623c9cccc37550672cff48ec4a3654bf91a12f1e322d1bf4aea,no
+_Backend_API_Node.js_Express_TypeScript_.ts,frontend/src/store/authStore.ts,frontend auth Zustand store,high,d52b50c6e19bf71b074cae77e4f6b9faf330ba2d4c464e34b8ba205154d1a997,no
+_Backend_API_Node.js_Express_TypeScript_ (2).ts,frontend/src/store/invoiceStore.ts,frontend invoice Zustand store,high,dd56451c55c002ab669c966e1957ee43dd53a8a4f450d04ff26f8bcae82e44bc,no
+_Backend_API_Node.js_Express_TypeScript_ (4).ts,frontend/src/components/ui/Button.tsx,frontend Button component,high,6b052d27fce256c82f643bea9f6a0939e89d7889f844df7842d2506809f8e115,no
+_Backend_API_Node.js_Express_TypeScript_ (5).ts,frontend/src/components/ui/Input.tsx,frontend Input component,high,e5df0a7a915b1a2d113501f9ce29207f75c4eb388df2e9e67d6347c0e0b827bb,no
+_Backend_API_Node.js_Express_TypeScript_ (6).ts,frontend/src/components/ui/Modal.tsx,frontend Modal component,high,ca4bcc5c9a76cd87654f2dfa0c4749acac3ccfd5896426d768c14dd982035b4b,no
+_Backend_API_Node.js_Express_TypeScript_ (7).ts,frontend/src/components/layout/Header.tsx,frontend Header layout,high,3cdf773bfb79d5b667493d77838574209111115427f09a437e51ca234e7e5edb,no
+_Backend_API_Node.js_Express_TypeScript_ (8).ts,frontend/src/components/layout/Layout.tsx,frontend routed Layout,high,2f4995e4e5c488e893285ad8b93f5248a2e316e78c341765c8133affb4daab09,no
+_Backend_API_Node.js_Express_TypeScript_ (9).ts,frontend/src/pages/auth/Register.tsx,frontend Register page,high,a9fed5ff6db4688c1a91f4f34314e10de3a0b6b3fe157939fd714e756ae5e265,no
+_Backend_API_Node.js_Express_TypeScript_ (10).ts,frontend/src/pages/auth/Login.tsx,frontend Login page,high,b327361e7df25d7bc419ff6c8a5e8eee7ad527c5853b18ef97f33003d7403d0e,no
+_Backend_API_Node.js_Express_TypeScript_ (14).ts,frontend/src/services/api.ts,frontend Axios API client,high,ae3061d0f154e43c30646a054330a97eb3ab45f371b6ee44c3299bcb5049b9a5,no
+_Backend_API_Node.js_Express_TypeScript_ (17).ts,frontend/src/components/ui/Select.tsx,frontend Select component,high,54abc0e7f6c013663ee4df9c1ccf83ad205c033a4c7af1328f7e06fb20621a93,no
+_Backend_API_Node.js_Express_TypeScript_ (19).ts,frontend/src/components/layout/Sidebar.tsx,frontend Sidebar layout,high,d72fd18788f55d9b3d1ef16a914a06348f05bb06166cbfaac6916067a80d19ba,no
+_Complete_System_Architecture.ts,backend/src/domain/entities/User.ts,backend User entity/model,high,d8894971b2836d8a63fe5c907a6e1e78097304f38f047787a97a03f1a6f10905,no
+_Complete_System_Architecture (1).ts,backend/src/domain/entities/Customer.ts,backend Customer entity/model,high,6b024849c043029683dc272da457448130df944aa29fc7e09bc0bfed2a74345e,no
+_Complete_System_Architecture (2).ts,backend/src/config/database.ts,MongoDB/Redis database manager,high,2a8c42c3bfe614375df20b209d2da69781548e6596bc01a838bceae215c8e261,no
+_Complete_System_Architecture (3).ts,backend/src/config/cache.ts,cache service,high,4551eaae0dc86553f61ed48c3aa787488078a7bbcbe96b4e921b3543d757c465,no
+_Complete_System_Architecture (4).ts,backend/src/infrastructure/middleware/ValidationMiddleware.ts,validation middleware,high,eeaf9b8faaafd7c8fdbdd18b6ee0c622a330ea98a6a6b527ae8c9f5f69eba01e,no
+_Complete_System_Architecture (5).ts,backend/src/infrastructure/security/AdvancedRateLimit.ts,Redis rate limiter,medium,2fcd4392509eec4f7fc19328b3597601e73227231272095242ca4226ca26b0e8,no
+_Complete_System_Architecture (6).ts,backend/src/infrastructure/error/GlobalErrorHandler.ts,global error handler,high,1aee2213cb9d09b3ed3219e686c83fa1a402af67debf1068f9efea0d567edcd9,no
+_Complete_System_Architecture (7).ts,backend/src/infrastructure/repositories/UserRepository.ts,user repository,high,cd0c427697a24158a0a95d9e61eb3ce4ffc4edb3442a3cc66f06e434d1ba7339,no
+_Complete_System_Architecture (8).ts,backend/src/infrastructure/repositories/CustomerRepository.ts,customer repository,high,d557eb4b8b0e80662ee82ef9f7022ac48e1c1ecb3914e28246f72c1d308596ed,no
+_Complete_System_Architecture (10).ts,backend/src/application/use-cases/auth/RegisterUserUseCase.ts,register use case,high,26f131438ba2a7e25288a6fec910c43fa5a6a75440b6d3b524c777d9a636a032,no
+_Complete_System_Architecture (11).ts,backend/src/application/use-cases/auth/LoginUserUseCase.ts,login use case,high,02b0c6d5c26760020925c09999b4e60f4cc91a04ed301677ac60d495c4bd13ca,no
+_Complete_System_Architecture (12).ts,backend/src/application/use-cases/customer/CreateCustomerUseCase.ts,create customer use case,high,fd94fff4293936a9e7449c2889d90818e1563476e762cfa481bb53b5159260fe,no
+_Complete_System_Architecture (13).ts,backend/src/infrastructure/controllers/AuthController.ts,auth controller,high,29b9df7ccc814e6da10203eb0309503e7ce4da1bbd1b3818c877374a0e713f78,no
+_Complete_System_Architecture (14).ts,backend/src/infrastructure/controllers/CustomerController.ts,customer controller,high,45631a94f292dc6e2b5f6166ef6389b3cb340e14729131fcde3ddb339ae7a5cc,no

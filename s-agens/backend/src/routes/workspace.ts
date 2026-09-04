@@ -147,7 +147,9 @@ function handleError(err: unknown, label: string, res: any) {
 }
 
 function unavailable(res: any) {
-  res.status(503).json({ error: 'ANTHROPIC_API_KEY not configured' });
+  res.status(503).json({
+    error: codeAnalysis.configurationError() ?? 'Claude code analysis unavailable',
+  });
 }
 
 // POST /api/workspace/analyze-codebase — multi-file analysis

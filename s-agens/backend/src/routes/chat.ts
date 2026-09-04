@@ -18,7 +18,7 @@ const bodySchema = z.object({
 chat.post('/', async (req, res) => {
   if (!claudeChat.isAvailable()) {
     return res.status(503).json({
-      error: 'ANTHROPIC_API_KEY not configured — Claude chat unavailable',
+      error: claudeChat.configurationError() ?? 'Claude chat unavailable',
     });
   }
 

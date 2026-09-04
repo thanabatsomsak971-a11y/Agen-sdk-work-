@@ -35,7 +35,15 @@ export class ClaudeChat {
   }
 
   isAvailable(): boolean {
-    return this.client !== null;
+    return this.client !== null && this.configurationError() === null;
+  }
+
+  configurationError(): string | null {
+    if (!env.ANTHROPIC_API_KEY) return 'ANTHROPIC_API_KEY not configured';
+    if (env.ANTHROPIC_WORKSPACE_ID && !env.ANTHROPIC_WORKSPACE_ID.startsWith('wrkspc_')) {
+      return 'ANTHROPIC_WORKSPACE_ID must start with wrkspc_ for this identity-linked API key';
+    }
+    return null;
   }
 
   getModel(): string {

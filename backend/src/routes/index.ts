@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import subjects from './subjects';
 import reports from './reports';
+import memory from './memory';
 import { ensemble } from '../ai/EnsembleRouter';
 import { getElasticsearch } from '../config/elasticsearch';
 
@@ -34,5 +35,6 @@ api.get('/ai/status', (_req, res) => {
 
 api.use('/subjects', subjects);
 api.use('/reports', reports);
+api.use('/memory', memory);
 
 export default api;

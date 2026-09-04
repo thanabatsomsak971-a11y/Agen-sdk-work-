@@ -1,13 +1,17 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { useReports, type Report } from './stores/reports';
 import { ReportRow } from './components/ReportRow';
+import { MemoryDashboard } from './components/MemoryDashboard';
+
+type View = 'live' | 'memory';
 
 const API_URL: string =
   (import.meta.env.VITE_API_URL as string | undefined) ?? 'http://localhost:3001';
 
 export default function App(): JSX.Element {
   const { reports, connected, push, setConnected, clear } = useReports();
+  const [view, setView] = useState<View>('live');
 
   useEffect(() => {
     const socket: Socket = io(API_URL, { transports: ['websocket', 'polling'] });
@@ -41,21 +45,33 @@ export default function App(): JSX.Element {
             </div>
           </div>
           <div className="flex items-center gap-4 text-xs">
-            <span
-              className={
-                connected
-                  ? 'text-emerald-400'
-                  : 'text-red-400'
-              }
-            >
-              ● {connected ? 'connected' : 'offline'}
-            </span>
-            <button
-              onClick={clear}
-              className="rounded border border-carbon-700 px-3 py-1 hover:bg-carbon-800"
-            >
-              Clear
-            </button>
+            <nav className="flex gap-1">
+              <TabButton active={view === 'live'} onClick={() => setView('live')}>
+                Live
+              </TabButton>
+              <TabButton active={view === 'memory'} onClick={() => setView('memory')}>
+                Memory
+              </TabButton>
+            </nav>
+            {view === 'live' && (
+              <>
+                <span
+                  className={
+                    connected
+                      ? 'text-emerald-400'
+                      : 'text-red-400'
+                  }
+                >
+                  ● {connected ? 'connected' : 'offline'}
+                </span>
+                <button
+                  onClick={clear}
+                  className="rounded border border-carbon-700 px-3 py-1 hover:bg-carbon-800"
+                >
+                  Clear
+                </button>
+              </>
+            )}
           </div>
         </div>
         <div className="mt-3 flex gap-4 text-xs">
@@ -67,7 +83,9 @@ export default function App(): JSX.Element {
       </header>
 
       <main className="p-6">
-        {reports.length === 0 ? (
+        {view === 'memory' ? (
+          <MemoryDashboard />
+        ) : reports.length === 0 ? (
           <div className="rounded border border-dashed border-carbon-700 p-10 text-center text-chrome-600">
             รอ report จาก backend... (ทุก 5 วิ ระบบจะสร้าง report จาก subject ที่ active)
           </div>
@@ -97,5 +115,28 @@ function Stat({
       <span className="text-chrome-600">{label}</span>
       <span className={`font-mono ${tone}`}>{value}</span>
     </div>
+  );
+}
+
+function TabButton({
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}): JSX.Element {
+  return (
+    <button
+      onClick={onClick}
+      className={
+        active
+          ? 'rounded border border-ice-500/40 bg-ice-500/10 px-3 py-1 text-ice-300'
+          : 'rounded border border-carbon-700 px-3 py-1 text-chrome-600 hover:bg-carbon-800'
+      }
+    >
+      {children}
+    </button>
   );
 }

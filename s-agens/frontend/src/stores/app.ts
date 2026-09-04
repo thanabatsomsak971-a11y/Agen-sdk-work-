@@ -31,7 +31,7 @@ export const SURFACES: SurfaceMeta[] = [
   { id: 'search',     label: 'Search',     icon: '🔍', group: 'tools', implemented: false },
   { id: 'extensions', label: 'Extensions', icon: '🧩', group: 'tools', implemented: false },
   { id: 'cloud',      label: 'Cloud',      icon: '☁️', group: 'tools', implemented: false },
-  { id: 'settings',   label: 'Settings',    icon: '⚙️', group: 'tools', implemented: false },
+  { id: 'settings',   label: 'Settings',    icon: '⚙️', group: 'tools', implemented: true  },
   { id: 'security',   label: 'Security',    icon: '🔒', group: 'tools', implemented: false },
 ];
 

@@ -12,7 +12,6 @@ api.get('/health', (_req, res) => {
 api.get('/ai/status', (_req, res) => {
   res.json({
     available: ensemble.availableBrands(),
-    hint: 'Set ANTHROPIC_API_KEY / OPENAI_API_KEY / GOOGLE_API_KEY in .env to activate.',
   });
 });
 

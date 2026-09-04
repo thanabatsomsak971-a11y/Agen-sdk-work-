@@ -6,7 +6,7 @@ import { Sidebar } from './components/Sidebar';
 import { DashboardPage } from './pages/DashboardPage';
 import { ReportsPage } from './pages/ReportsPage';
 import { SubjectsPage } from './pages/SubjectsPage';
-import { AIStatusPage } from './pages/AIStatusPage';
+
 
 const API_URL: string =
   (import.meta.env.VITE_API_URL as string | undefined) ?? 'http://localhost:3001';
@@ -34,7 +34,7 @@ export default function App(): JSX.Element {
           {page === 'dashboard' && <DashboardPage apiUrl={API_URL} />}
           {page === 'reports' && <ReportsPage apiUrl={API_URL} />}
           {page === 'subjects' && <SubjectsPage apiUrl={API_URL} />}
-          {page === 'ai-status' && <AIStatusPage apiUrl={API_URL} />}
+
         </div>
       </main>
     </div>

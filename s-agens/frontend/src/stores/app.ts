@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import type { Report } from './reports';
 
-export type Page = 'dashboard' | 'reports' | 'subjects' | 'ai-status';
+export type Page = 'dashboard' | 'reports' | 'subjects';
 
 export interface Subject {
   _id: string;
@@ -14,7 +14,6 @@ export interface Subject {
 
 export interface AIStatus {
   available: string[];
-  hint: string;
 }
 
 interface AppState {

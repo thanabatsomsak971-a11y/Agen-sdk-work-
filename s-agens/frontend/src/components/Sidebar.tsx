@@ -5,7 +5,6 @@ const navItems: { id: Page; label: string; icon: string }[] = [
   { id: 'dashboard', label: 'Dashboard', icon: '⚡' },
   { id: 'reports', label: 'Reports', icon: '📋' },
   { id: 'subjects', label: 'Subjects', icon: '🎯' },
-  { id: 'ai-status', label: 'AI Status', icon: '🤖' },
 ];
 
 export function Sidebar({

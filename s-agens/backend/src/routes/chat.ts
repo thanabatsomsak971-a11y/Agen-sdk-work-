@@ -31,10 +31,21 @@ chat.post('/', async (req, res) => {
     const reply = await claudeChat.chat(parsed.data.messages as ChatMessage[]);
     res.json({ reply, model: claudeChat.getModel() });
   } catch (err) {
-    const message = (err as Error).message;
-    const status = message.includes('401') || message.includes('403')
+    const raw = (err as Error).message;
+    // Extract human-readable message from Anthropic API error JSON
+    let message = raw;
+    try {
+      const match = raw.match(/\{[\s\S]*\}/);
+      if (match) {
+        const parsed = JSON.parse(match[0]);
+        if (parsed?.error?.message) message = parsed.error.message;
+      }
+    } catch {
+      // keep raw message
+    }
+    const status = raw.includes('401') || raw.includes('403')
       ? 401
-      : message.includes('429')
+      : raw.includes('429')
         ? 429
         : 500;
     // eslint-disable-next-line no-console

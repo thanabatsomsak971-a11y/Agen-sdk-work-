@@ -1,0 +1,11 @@
+{
+  "previewPort": 3000,
+  "healthPath": "/",
+  "startCommand": "docker compose -f docker-compose.base44.yml up -d",
+  "secrets": [
+    { "name": "JWT_SECRET", "description": "JWT signing secret for auth (min 16 chars). A dev default is provided; override with a real value for production.", "requiredAtBoot": false },
+    { "name": "ANTHROPIC_API_KEY", "description": "Anthropic Claude API key for AI inspection. Optional — AI inspection is not implemented yet.", "requiredAtBoot": false },
+    { "name": "OPENAI_API_KEY", "description": "OpenAI API key for AI inspection. Optional — AI inspection is not implemented yet.", "requiredAtBoot": false },
+    { "name": "GOOGLE_API_KEY", "description": "Google Gemini API key for AI inspection. Optional — AI inspection is not implemented yet.", "requiredAtBoot": false }
+  ]
+}

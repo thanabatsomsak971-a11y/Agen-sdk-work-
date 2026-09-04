@@ -1,0 +1,22 @@
+{
+  "previewPort": 3000,
+  "healthPath": "/",
+  "startCommand": "docker compose -f docker-compose.base44.yml up -d",
+  "secrets": [
+    {
+      "name": "ANTHROPIC_API_KEY",
+      "description": "Anthropic API key for AI inspection (optional — app runs in stub mode without it)",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "OPENAI_API_KEY",
+      "description": "OpenAI API key for AI inspection (optional — app runs in stub mode without it)",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "GOOGLE_API_KEY",
+      "description": "Google AI (Gemini) API key for AI inspection (optional — app runs in stub mode without it)",
+      "requiredAtBoot": false
+    }
+  ]
+}

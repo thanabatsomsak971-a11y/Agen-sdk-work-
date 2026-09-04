@@ -77,6 +77,78 @@ export class CodeAnalysis {
       1200,
     );
   }
+
+  // ── Advanced capabilities (from Deep Reshare integration) ──
+  // All return raw Claude text — no hardcoded parsing or fake structured data.
+
+  async analyzeCodebase(files: { name: string; content: string }[]): Promise<string> {
+    const fileDescriptions = files
+      .map((f) => `### ${f.name}\n\`\`\`\n${f.content}\n\`\`\``)
+      .join('\n\n');
+    return this.call(
+      `Analyze this codebase (${files.length} files):\n\n${fileDescriptions}\n\n` +
+        'Provide:\n1. Overall quality assessment\n2. Architecture insights\n' +
+        '3. Issues found per file\n4. Consolidated recommendations',
+      2048,
+    );
+  }
+
+  async generateAPIDocs(
+    endpoints: { method: string; path: string; description: string }[],
+  ): Promise<string> {
+    const list = endpoints.map((ep) => `- ${ep.method} ${ep.path}: ${ep.description}`).join('\n');
+    return this.call(
+      `Generate comprehensive API documentation for these endpoints:\n\n${list}\n\n` +
+        'Create:\n1. OpenAPI/Swagger documentation\n2. Request/response examples\n' +
+        '3. Error handling\n4. Authentication requirements\n5. Usage examples in TypeScript',
+      2048,
+    );
+  }
+
+  async optimizeDatabaseSchema(
+    entities: { name: string; fields: { name: string; type: string; required: boolean }[] }[],
+  ): Promise<string> {
+    const desc = entities
+      .map(
+        (e) =>
+          `Entity: ${e.name}\nFields: ${e.fields
+            .map((f) => `${f.name}: ${f.type}${f.required ? '' : '?'}`)
+            .join(', ')}`,
+      )
+      .join('\n\n');
+    return this.call(
+      `Optimize this database schema for performance and scalability:\n\n${desc}\n\n` +
+        'Provide:\n1. Optimized schema definition\n2. Recommended indexes\n' +
+        '3. Performance tips\n4. Migration scripts (MongoDB/Mongoose)',
+      2048,
+    );
+  }
+
+  async generateTestSuite(
+    code: string,
+    testType: 'unit' | 'integration' | 'e2e',
+  ): Promise<string> {
+    return this.call(
+      `Generate comprehensive ${testType} tests for this TypeScript code:\n\n` +
+        `\`\`\`typescript\n${code}\n\`\`\`\n\n` +
+        'Create:\n1. Complete test file with Vitest\n2. Mock implementations\n' +
+        '3. Edge case testing\n4. Error scenario testing',
+      2048,
+    );
+  }
+
+  async generateDeploymentGuide(
+    techStack: string[],
+    environment: 'dev' | 'staging' | 'prod',
+  ): Promise<string> {
+    return this.call(
+      `Generate deployment guide for ${environment} environment:\n\n` +
+        `Tech Stack: ${techStack.join(', ')}\n\n` +
+        'Include:\n1. Step-by-step deployment process\n2. Required environment variables\n' +
+        '3. Monitoring setup\n4. Troubleshooting common issues\n5. Scaling strategies',
+      2048,
+    );
+  }
 }
 
 export const codeAnalysis = new CodeAnalysis();

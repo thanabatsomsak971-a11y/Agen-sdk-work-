@@ -10,6 +10,7 @@ const schema = z.object({
   JWT_EXPIRES_IN: z.string().default('7d'),
   CORS_ORIGIN: z.string().default('http://localhost:5173'),
   ANTHROPIC_API_KEY: z.string().optional().default(''),
+  ANTHROPIC_MODEL: z.string().default('claude-sonnet-4-20250514'),
   OPENAI_API_KEY: z.string().optional().default(''),
   GOOGLE_API_KEY: z.string().optional().default(''),
   INSPECTION_INTERVAL_MS: z.coerce.number().int().positive().default(5000),

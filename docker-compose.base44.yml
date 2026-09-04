@@ -36,6 +36,8 @@ services:
       JWT_SECRET: dev-only-secret-change-in-production-please-min32chars
       CORS_ORIGIN: https://3000-${BASE44_PUBLIC_HOST_SUFFIX}
       INSPECTION_INTERVAL_MS: 5000
+    env_file:
+      - /run/base44/app.env
     command: sh -c "[ -d node_modules ] || npm install && npm run dev"
     depends_on:
       mongo:

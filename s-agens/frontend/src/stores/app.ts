@@ -24,7 +24,7 @@ export const SURFACES: SurfaceMeta[] = [
   { id: 'agents',   label: 'Agents',   icon: '🤖', group: 'nav',  implemented: true  },
   { id: 'profile',  label: 'Profile',  icon: '👤', group: 'nav',  implemented: false },
   // Tools
-  { id: 'chat',       label: 'AI Chat',    icon: '💬',  group: 'tools', implemented: false },
+  { id: 'chat',       label: 'AI Chat',    icon: '💬',  group: 'tools', implemented: true  },
   { id: 'image-gen',  label: 'Image Gen',  icon: '🖼️', group: 'tools', implemented: false },
   { id: 'agent',      label: 'Agent',      icon: '⚡',  group: 'tools', implemented: false },
   { id: 'code',       label: 'Code',       icon: '📝', group: 'tools', implemented: false },

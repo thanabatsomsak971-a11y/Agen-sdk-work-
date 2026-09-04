@@ -7,6 +7,7 @@ import { DashboardPage } from './pages/DashboardPage';
 import { ProjectsSurface } from './surfaces/ProjectsSurface';
 import { AIStatusPage } from './pages/AIStatusPage';
 import { NotImplementedSurface } from './surfaces/NotImplementedSurface';
+import { ChatSurface } from './surfaces/ChatSurface';
 
 const API_URL: string =
   (import.meta.env.VITE_API_URL as string | undefined) ?? 'http://localhost:3001';
@@ -51,6 +52,7 @@ export default function App(): JSX.Element {
           {surface === 'home' && <DashboardPage apiUrl={API_URL} />}
           {surface === 'projects' && <ProjectsSurface apiUrl={API_URL} />}
           {surface === 'agents' && <AIStatusPage apiUrl={API_URL} />}
+          {surface === 'chat' && <ChatSurface apiUrl={API_URL} />}
 
           {/* Surfaces without implementation — honest NOT IMPLEMENTED */}
           {currentSurface && !currentSurface.implemented && (

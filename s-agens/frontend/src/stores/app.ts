@@ -1,7 +1,41 @@
 import { create } from 'zustand';
 import type { Report } from './reports';
 
-export type Page = 'dashboard' | 'reports' | 'subjects';
+// ── S-AI Workspace Shell: Surface types ──
+
+export type Surface =
+  | 'home' | 'projects' | 'create' | 'agents' | 'profile'
+  | 'chat' | 'image-gen' | 'agent' | 'code' | 'search'
+  | 'extensions' | 'cloud' | 'settings' | 'security';
+
+export interface SurfaceMeta {
+  id: Surface;
+  label: string;
+  icon: string;
+  group: 'nav' | 'tools';
+  implemented: boolean;
+}
+
+export const SURFACES: SurfaceMeta[] = [
+  // Primary navigation
+  { id: 'home',     label: 'Home',     icon: '🏠', group: 'nav',  implemented: true  },
+  { id: 'projects', label: 'Projects', icon: '📁', group: 'nav',  implemented: true  },
+  { id: 'create',   label: 'Create',   icon: '➕', group: 'nav',  implemented: false },
+  { id: 'agents',   label: 'Agents',   icon: '🤖', group: 'nav',  implemented: true  },
+  { id: 'profile',  label: 'Profile',  icon: '👤', group: 'nav',  implemented: false },
+  // Tools
+  { id: 'chat',       label: 'AI Chat',    icon: '💬',  group: 'tools', implemented: false },
+  { id: 'image-gen',  label: 'Image Gen',  icon: '🖼️', group: 'tools', implemented: false },
+  { id: 'agent',      label: 'Agent',      icon: '⚡',  group: 'tools', implemented: false },
+  { id: 'code',       label: 'Code',       icon: '📝', group: 'tools', implemented: false },
+  { id: 'search',     label: 'Search',     icon: '🔍', group: 'tools', implemented: false },
+  { id: 'extensions', label: 'Extensions', icon: '🧩', group: 'tools', implemented: false },
+  { id: 'cloud',      label: 'Cloud',      icon: '☁️', group: 'tools', implemented: false },
+  { id: 'settings',   label: 'Settings',    icon: '⚙️', group: 'tools', implemented: false },
+  { id: 'security',   label: 'Security',    icon: '🔒', group: 'tools', implemented: false },
+];
+
+// ── Existing data types ──
 
 export interface Subject {
   _id: string;
@@ -17,9 +51,13 @@ export interface AIStatus {
 }
 
 interface AppState {
-  page: Page;
-  setPage: (p: Page) => void;
+  // Shell navigation
+  surface: Surface;
+  setSurface: (s: Surface) => void;
+  toolsOpen: boolean;
+  setToolsOpen: (open: boolean) => void;
 
+  // Subjects
   subjects: Subject[];
   loadingSubjects: boolean;
   subjectsError: string | null;
@@ -28,23 +66,28 @@ interface AppState {
   deleteSubject: (apiUrl: string, id: string) => Promise<void>;
   toggleSubject: (apiUrl: string, id: string, active: boolean) => Promise<void>;
 
+  // Reports
   historicalReports: Report[];
   loadingReports: boolean;
   reportsError: string | null;
   fetchReports: (apiUrl: string) => Promise<void>;
 
+  // AI Status
   aiStatus: AIStatus | null;
   loadingAI: boolean;
   aiError: string | null;
   fetchAIStatus: (apiUrl: string) => Promise<void>;
 
+  // Health
   healthOk: boolean | null;
   fetchHealth: (apiUrl: string) => Promise<void>;
 }
 
 export const useApp = create<AppState>((set, get) => ({
-  page: 'dashboard',
-  setPage: (p) => set({ page: p }),
+  surface: 'home',
+  setSurface: (s) => set({ surface: s, toolsOpen: false }),
+  toolsOpen: false,
+  setToolsOpen: (open) => set({ toolsOpen: open }),
 
   subjects: [],
   loadingSubjects: false,
